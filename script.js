@@ -46,6 +46,7 @@
     var currentObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
+          entry.target.classList.add('is-live');
           var idx = entry.target.getAttribute('data-index');
           currentIndex = sections.indexOf(entry.target);
           counter.textContent = idx;
@@ -58,6 +59,7 @@
     sections.forEach(function (s) { currentObserver.observe(s); });
   } else {
     reveals.forEach(function (el) { reveal(el, true); });
+    sections.forEach(function (s) { s.classList.add('is-live'); });
   }
 
   /* --- страховка: то, что уже пролистали (быстрый скролл, End, восстановление

@@ -115,6 +115,70 @@ body{
 }
 .s--center .eyebrow,.s--final .eyebrow{text-align:center}
 
+/* ---------- фотоподложка ---------- */
+
+.shot{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  background:var(--bg-2);
+}
+.shot img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 55%;
+  display:block;
+  transform:scale(1.06);
+  transition:transform 2.4s var(--ease);
+}
+.s.is-live .shot img{transform:none}
+
+.shot::after{
+  content:'';
+  position:absolute;
+  inset:0;
+}
+.shot--cover::after{
+  background:linear-gradient(to top,
+    rgba(26,21,14,.78) 0%,
+    rgba(26,21,14,.42) 34%,
+    rgba(26,21,14,.06) 68%,
+    rgba(26,21,14,0) 100%);
+}
+.shot--full::after{
+  background:
+    linear-gradient(to bottom, rgba(26,21,14,.34) 0%, rgba(26,21,14,.30) 100%),
+    radial-gradient(70% 60% at 50% 50%, rgba(26,21,14,.42) 0%, rgba(26,21,14,0) 100%);
+}
+.shot--full img{object-position:32% 42%}
+.shot--final img{object-position:center 30%}
+.shot--side img{object-position:62% center}
+
+/* текст поверх фото */
+.s--shot .t,
+.s--shot .ch,
+.s--shot .lead{color:#fff}
+.s--shot .m,
+.s--shot .note{color:rgba(255,255,255,.76)}
+.s--shot .eyebrow{color:#e8c9a0}
+
+/* 01 — обложка: крупный титул у нижнего края */
+.s--cover .panel__inner{justify-content:flex-end}
+.t--hero{
+  text-transform:uppercase;
+  font-weight:700;
+  font-size:clamp(27px,5.2vw,92px);
+  line-height:.96;
+  letter-spacing:-.028em;
+  text-wrap:balance;
+}
+
+/* 08 — сплит: кадр слева во всю высоту панели */
+.s--split .shot{right:auto;width:41%}
+.s--split .panel__inner{padding-left:calc(41% + var(--pad-x))}
+
 /* ---------- wireframe-графика ---------- */
 
 .structure{
@@ -123,23 +187,7 @@ body{
   color:var(--ink);
   z-index:1;
 }
-.structure--hero{
-  width:clamp(220px,30vw,440px);
-  height:auto;
-  top:50%;
-  right:clamp(-10px,1vw,24px);
-  transform:translateY(-50%);
-  opacity:.4;
-}
-.s--cover .wrap{max-width:66%}
-.structure--final{
-  right:auto;
-  left:50%;
-  top:10%;
-  width:clamp(170px,20vw,280px);
-  transform:translateX(-50%);
-  opacity:.18;
-}
+.s--cover .wrap{max-width:min(1000px,78%)}
 .structure--side{
   width:clamp(120px,14vw,190px);
   top:clamp(14px,3.4vh,30px);
@@ -434,14 +482,13 @@ body{
   .row{grid-template-columns:1fr;gap:6px;align-items:start}
   .lead{max-width:none}
   .s--cover .wrap{max-width:100%}
-  .structure--hero{
-    top:auto;bottom:clamp(8px,2vh,20px);right:50%;
-    transform:translateX(50%);
-    width:clamp(130px,42vw,220px);
-    opacity:.22;
-  }
-  .structure--final{width:clamp(140px,36vw,220px)}
   .structure--side{width:clamp(84px,22vw,120px);opacity:.1}
+  .s--split .shot{width:100%;height:30svh;bottom:auto}
+  .s--split .shot--side img{object-position:center 58%}
+  .s--split .panel__inner{
+    padding-left:var(--pad-x);
+    padding-top:calc(30svh + var(--pad-y) + var(--frame-reserve));
+  }
   .mark__label{display:none}
   .chrome--progress__label{display:none}
 }
@@ -455,6 +502,7 @@ body{
   html{scroll-snap-type:y proximity}
   .s{scroll-snap-stop:normal;min-height:100vh;height:auto;padding:calc(var(--gutter) + 2px) 0}
   .panel{height:auto;min-height:calc(100vh - var(--gutter) * 2)}
+  .panel__inner{min-height:calc(100vh - var(--gutter) * 2);min-height:calc(100svh - var(--gutter) * 2)}
 }
 
 @media (max-height:560px){
@@ -467,4 +515,5 @@ body{
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .r{opacity:1;transform:none;transition:none}
+  .shot img{transform:none;transition:none}
 }

@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/render-01.jpg">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -112,12 +113,14 @@
 <main class="stage">
 
   <!-- 01 -->
-  <section class="s s--cover" id="s01" data-index="01">
+  <section class="s s--cover s--shot" id="s01" data-index="01">
     <div class="panel">
+      <figure class="shot shot--cover">
+        <img src="assets/render-01.jpg" alt="Архитектурный рендер: минималистичный объём с панорамным остеклением" fetchpriority="high" decoding="async">
+      </figure>
       <div class="panel__inner">
-        <svg class="structure structure--hero" aria-hidden="true"><use href="#ico-structure"></use></svg>
         <div class="wrap">
-          <h1 class="t t--xl r">Я&nbsp;не использовал ИИ.<br>Поэтому разобрался честно.</h1>
+          <h1 class="t t--hero r">Я&nbsp;не использовал ИИ.<br>Поэтому разобрался честно.</h1>
           <p class="m r" data-d="1">Как ИИ реально встраивается в работу архитектора и дизайнера интерьера</p>
         </div>
       </div>
@@ -145,8 +148,11 @@
   </section>
 
   <!-- 03 -->
-  <section class="s s--center" id="s03" data-index="03">
+  <section class="s s--center s--shot" id="s03" data-index="03">
     <div class="panel">
+      <figure class="shot shot--full">
+        <img src="assets/render-01.jpg" alt="" loading="lazy" decoding="async">
+      </figure>
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 02 / тезис ]</span>
@@ -248,8 +254,11 @@
   </section>
 
   <!-- 08 -->
-  <section class="s" id="s08" data-index="08">
+  <section class="s s--split" id="s08" data-index="08">
     <div class="panel">
+      <figure class="shot shot--side">
+        <img src="assets/render-01.jpg" alt="" loading="lazy" decoding="async">
+      </figure>
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 07 / визуал ]</span>
@@ -311,10 +320,12 @@
   </section>
 
   <!-- 11 -->
-  <section class="s s--center s--final" id="s11" data-index="11">
+  <section class="s s--center s--final s--shot" id="s11" data-index="11">
     <div class="panel">
+      <figure class="shot shot--full shot--final">
+        <img src="assets/render-01.jpg" alt="" loading="lazy" decoding="async">
+      </figure>
       <div class="panel__inner">
-        <svg class="structure structure--hero structure--final" aria-hidden="true"><use href="#ico-structure"></use></svg>
         <div class="wrap">
           <span class="eyebrow r">[ 10 / финал ]</span>
           <h2 class="t t--xl r">Я&nbsp;не использовал ИИ. Теперь буду.</h2>
