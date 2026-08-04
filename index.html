@@ -6,168 +6,320 @@
 <title>Зачем ИИ в сфере архитектуры и дизайна</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="progress" aria-hidden="true"><span class="progress__fill"></span></div>
-<div class="counter" aria-hidden="true"><span class="counter__cur">01</span> / 11</div>
+<!-- SVG-символы: переиспользуемый wireframe-объект и служебные иконки -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ico-menu" viewBox="0 0 16 16">
+      <circle cx="2" cy="2" r="1.3"></circle><circle cx="8" cy="2" r="1.3"></circle><circle cx="14" cy="2" r="1.3"></circle>
+      <circle cx="2" cy="8" r="1.3"></circle><circle cx="8" cy="8" r="1.3"></circle><circle cx="14" cy="8" r="1.3"></circle>
+      <circle cx="2" cy="14" r="1.3"></circle><circle cx="8" cy="14" r="1.3"></circle><circle cx="14" cy="14" r="1.3"></circle>
+    </symbol>
+    <symbol id="ico-arrow" viewBox="0 0 24 24">
+      <path d="M4 12h16M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+    </symbol>
+    <symbol id="ico-node" viewBox="0 0 16 16">
+      <path d="M8 1v4M8 11v4M1 8h4M11 8h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"></path>
+      <circle cx="8" cy="8" r="2.2" fill="none" stroke="currentColor" stroke-width="1.3"></circle>
+    </symbol>
+    <!-- wireframe-строение: аксонометрия минималистичного объёма -->
+    <symbol id="ico-structure" viewBox="0 0 400 460">
+      <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M60 360 L200 430 L340 360 L340 160 L200 90 L60 160 Z"></path>
+        <path d="M60 160 L200 230 L340 160"></path>
+        <path d="M200 230 L200 430"></path>
+        <path d="M60 220 L200 290 L340 220"></path>
+        <path d="M200 290 L200 430" opacity=".55"></path>
+        <path d="M60 280 L200 350 L340 280"></path>
+        <path d="M60 160 L60 360"></path>
+        <path d="M340 160 L340 360"></path>
+        <path d="M130 195 L130 395" opacity=".4"></path>
+        <path d="M270 195 L270 395" opacity=".4"></path>
+        <path d="M200 90 L200 30" opacity=".6"></path>
+        <path d="M170 40 L230 40" opacity=".6"></path>
+        <path d="M20 400 L380 400" stroke-dasharray="2 8" opacity=".35"></path>
+      </g>
+      <g class="structure-nodes" fill="currentColor" stroke="none">
+        <circle cx="200" cy="230" r="4"></circle>
+        <circle cx="60" cy="160" r="3"></circle>
+        <circle cx="340" cy="280" r="3"></circle>
+        <circle cx="200" cy="30" r="3"></circle>
+      </g>
+    </symbol>
+  </defs>
+</svg>
 
-<main>
+<!-- фон: неподвижный туманный градиент -->
+<div class="atmosphere" aria-hidden="true"></div>
+
+<!-- фрейм: постоянный UI-чейн поверх панелей -->
+<header class="frame frame--top">
+  <div class="menu-wrap">
+    <button class="chrome chrome--menu" id="menuBtn" aria-haspopup="true" aria-expanded="false" aria-controls="menuPanel" type="button">
+      <svg class="chrome__icon"><use href="#ico-menu"></use></svg>
+      <span>[ Меню ]</span>
+    </button>
+    <nav class="menu-panel" id="menuPanel" aria-hidden="true">
+      <ol class="menu-panel__list">
+        <li><a href="#s01" data-i="01"><span>01</span>Обложка</a></li>
+        <li><a href="#s02" data-i="02"><span>02</span>Где уходит время</a></li>
+        <li><a href="#s03" data-i="03"><span>03</span>Главный тезис</a></li>
+        <li><a href="#s04" data-i="04"><span>04</span>Три способа подключения</a></li>
+        <li><a href="#s05" data-i="05"><span>05</span>Коммуникация</a></li>
+        <li><a href="#s06" data-i="06"><span>06</span>Знания компании</a></li>
+        <li><a href="#s07" data-i="07"><span>07</span>Проектирование</a></li>
+        <li><a href="#s08" data-i="08"><span>08</span>Визуал</a></li>
+        <li><a href="#s09" data-i="09"><span>09</span>Что ИИ не делает</a></li>
+        <li><a href="#s10" data-i="10"><span>10</span>План внедрения</a></li>
+        <li><a href="#s11" data-i="11"><span>11</span>Финал</a></li>
+      </ol>
+    </nav>
+  </div>
+  <div class="chrome chrome--mark" aria-hidden="true">
+    <svg class="chrome__icon chrome__icon--mark"><use href="#ico-node"></use></svg>
+    <span class="mark__label">ИИ&nbsp;× АРХИТЕКТУРА</span>
+  </div>
+  <button class="chrome chrome--cta" id="nextBtn" type="button">
+    <span>[ Далее ]</span>
+    <svg class="chrome__icon"><use href="#ico-arrow"></use></svg>
+  </button>
+</header>
+
+<footer class="frame frame--bottom">
+  <div class="chrome chrome--progress">
+    <span class="progress-ring" aria-hidden="true">
+      <svg viewBox="0 0 34 34"><circle class="ring-track" cx="17" cy="17" r="14.5"></circle><circle class="ring-fill" cx="17" cy="17" r="14.5"></circle></svg>
+      <span class="progress-ring__num"><span class="progress-pct">0</span>%</span>
+    </span>
+    <span class="chrome--progress__label">Прогресс показа</span>
+  </div>
+  <div class="chrome chrome--counter">
+    <svg class="chrome__icon"><use href="#ico-node"></use></svg>
+    <span><span class="counter__cur">01</span> / 11</span>
+  </div>
+</footer>
+
+<ol class="dots" aria-hidden="true">
+  <li class="dots__i is-active"></li><li class="dots__i"></li><li class="dots__i"></li><li class="dots__i"></li>
+  <li class="dots__i"></li><li class="dots__i"></li><li class="dots__i"></li><li class="dots__i"></li>
+  <li class="dots__i"></li><li class="dots__i"></li><li class="dots__i"></li>
+</ol>
+
+<main class="stage">
 
   <!-- 01 -->
-  <section class="s s--cover" data-index="01">
-    <div class="wrap">
-      <h1 class="t t--xl r">Я&nbsp;не использовал ИИ.<br>Поэтому разобрался честно.</h1>
-      <p class="m r" data-d="1">Как ИИ реально встраивается в работу архитектора и дизайнера интерьера</p>
+  <section class="s s--cover" id="s01" data-index="01">
+    <div class="panel">
+      <div class="panel__inner">
+        <svg class="structure structure--hero" aria-hidden="true"><use href="#ico-structure"></use></svg>
+        <div class="wrap">
+          <h1 class="t t--xl r">Я&nbsp;не использовал ИИ.<br>Поэтому разобрался честно.</h1>
+          <p class="m r" data-d="1">Как ИИ реально встраивается в работу архитектора и дизайнера интерьера</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- 02 -->
-  <section class="s" data-index="02">
-    <div class="wrap">
-      <h2 class="t t--m r">Сначала&nbsp;— где уходит время</h2>
-      <ul class="list">
-        <li class="m m--lg r" data-d="1">сборка референсов в презентацию</li>
-        <li class="m m--lg r" data-d="2">спецификации и пересчёт</li>
-        <li class="m m--lg r" data-d="3">рендеры, которые превращаются в ролик вручную</li>
-        <li class="m m--lg r" data-d="4">переименование, пересохранение, выгрузки</li>
-        <li class="m m--lg r" data-d="5">КП, которое собирается три дня</li>
-      </ul>
-      <p class="note r" data-d="7">Ни один из этих пунктов&nbsp;— не дизайн.<br>Это обслуживание дизайна.</p>
+  <section class="s" id="s02" data-index="02">
+    <div class="panel">
+      <div class="panel__inner">
+        <div class="wrap">
+          <span class="eyebrow r">[ 01 / диагностика ]</span>
+          <h2 class="t t--m r">Сначала&nbsp;— где уходит время</h2>
+          <ul class="list">
+            <li class="m m--lg r" data-d="1">сборка референсов в презентацию</li>
+            <li class="m m--lg r" data-d="2">спецификации и пересчёт</li>
+            <li class="m m--lg r" data-d="3">рендеры, которые превращаются в ролик вручную</li>
+            <li class="m m--lg r" data-d="4">переименование, пересохранение, выгрузки</li>
+            <li class="m m--lg r" data-d="5">КП, которое собирается три дня</li>
+          </ul>
+          <p class="note r" data-d="7">Ни один из этих пунктов&nbsp;— не дизайн.<br>Это обслуживание дизайна.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- 03 -->
-  <section class="s s--center" data-index="03">
-    <div class="wrap">
-      <h2 class="t t--l r">ИИ&nbsp;— не плагин. Это сотрудник, который умеет писать на языке твоих программ.</h2>
+  <section class="s s--center" id="s03" data-index="03">
+    <div class="panel">
+      <div class="panel__inner">
+        <div class="wrap">
+          <span class="eyebrow r">[ 02 / тезис ]</span>
+          <h2 class="t t--l r">ИИ&nbsp;— не плагин. Это сотрудник, который умеет писать на языке твоих программ.</h2>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- 04 -->
-  <section class="s" data-index="04">
-    <div class="wrap">
-      <h2 class="t t--s r">Три способа подключения</h2>
-      <div class="cols cols--3">
-        <div class="col r" data-d="1">
-          <span class="num">01</span>
-          <h3 class="ch">Диалог</h3>
-          <p class="m">кинул файл, фото, PDF → получил результат</p>
-        </div>
-        <div class="col r" data-d="2">
-          <span class="num">02</span>
-          <h3 class="ch">Коннектор</h3>
-          <p class="m">готовый «провод» к сервису: почта, диск, календарь</p>
-        </div>
-        <div class="col r" data-d="3">
-          <span class="num">03</span>
-          <h3 class="ch">Скрипт</h3>
-          <p class="m">ИИ пишет команду на языке программы: AutoCAD, Revit, 3ds Max</p>
+  <section class="s" id="s04" data-index="04">
+    <div class="panel">
+      <div class="panel__inner">
+        <div class="wrap">
+          <span class="eyebrow r">[ 03 / подключение ]</span>
+          <h2 class="t t--s r">Три способа подключения</h2>
+          <div class="cols cols--3">
+            <div class="col r" data-d="1">
+              <span class="num">01</span>
+              <h3 class="ch">Диалог</h3>
+              <p class="m">кинул файл, фото, PDF → получил результат</p>
+            </div>
+            <div class="col r" data-d="2">
+              <span class="num">02</span>
+              <h3 class="ch">Коннектор</h3>
+              <p class="m">готовый «провод» к сервису: почта, диск, календарь</p>
+            </div>
+            <div class="col r" data-d="3">
+              <span class="num">03</span>
+              <h3 class="ch">Скрипт</h3>
+              <p class="m">ИИ пишет команду на языке программы: AutoCAD, Revit, 3ds Max</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 05 -->
-  <section class="s" data-index="05">
-    <div class="wrap">
-      <h2 class="t t--m r">Коммуникация</h2>
-      <dl class="rows">
-        <div class="row r" data-d="1"><dt class="ch ch--sm">Почта</dt><dd class="m">читает переписку по объекту, выдаёт статус</dd></div>
-        <div class="row r" data-d="2"><dt class="ch ch--sm">Календарь</dt><dd class="m">ставит встречи по голосовой команде</dd></div>
-        <div class="row r" data-d="3"><dt class="ch ch--sm">Telegram</dt><dd class="m">бот, который пересказывает чат и готовит черновик ответа</dd></div>
-      </dl>
+  <section class="s" id="s05" data-index="05">
+    <div class="panel">
+      <div class="panel__inner">
+        <div class="wrap">
+          <span class="eyebrow r">[ 04 / коммуникация ]</span>
+          <h2 class="t t--m r">Коммуникация</h2>
+          <dl class="rows">
+            <div class="row r" data-d="1"><dt class="ch ch--sm">Почта</dt><dd class="m">читает переписку по объекту, выдаёт статус</dd></div>
+            <div class="row r" data-d="2"><dt class="ch ch--sm">Календарь</dt><dd class="m">ставит встречи по голосовой команде</dd></div>
+            <div class="row r" data-d="3"><dt class="ch ch--sm">Telegram</dt><dd class="m">бот, который пересказывает чат и готовит черновик ответа</dd></div>
+          </dl>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- 06 -->
-  <section class="s" data-index="06">
-    <div class="wrap">
-      <h2 class="t t--m r">Знания компании</h2>
-      <p class="lead r" data-d="1">Google Диск подключается напрямую. ИИ ищет не по названию файла, а по смыслу.</p>
-      <div class="term">
-        <p class="m m--term r" data-d="3">&gt; найди спецификацию по объекту на Патриарших</p>
-        <p class="m m--term r" data-d="4">&gt; собери референсы и наброски проекта в единый мудборд</p>
-        <p class="m m--term r" data-d="5">&gt; оживи рендеры гостиной в ролик с движением камеры</p>
+  <section class="s" id="s06" data-index="06">
+    <div class="panel">
+      <div class="panel__inner">
+        <div class="wrap">
+          <span class="eyebrow r">[ 05 / знания ]</span>
+          <h2 class="t t--m r">Знания компании</h2>
+          <p class="lead r" data-d="1">Google Диск подключается напрямую. ИИ ищет не по названию файла, а по смыслу.</p>
+          <div class="term">
+            <p class="m m--term r" data-d="3">&gt; найди спецификацию по объекту на Патриарших</p>
+            <p class="m m--term r" data-d="4">&gt; собери референсы и наброски проекта в единый мудборд</p>
+            <p class="m m--term r" data-d="5">&gt; оживи рендеры гостиной в ролик с движением камеры</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- 07 -->
-  <section class="s" data-index="07">
-    <div class="wrap">
-      <h2 class="t t--s r">Проектирование</h2>
-      <div class="cols cols--3">
-        <div class="col r" data-d="1">
-          <h3 class="ch">AutoCAD</h3>
-          <p class="m">AutoLISP&nbsp;— слои, блоки, штампы</p>
-        </div>
-        <div class="col r" data-d="2">
-          <h3 class="ch">Revit</h3>
-          <p class="m">Dynamo, pyRevit&nbsp;— спецификации, ведомости</p>
-        </div>
-        <div class="col r" data-d="3">
-          <h3 class="ch">3ds Max</h3>
-          <p class="m">MAXScript, Python&nbsp;— чистка сцены, батч-переименование, параметрическая геометрия</p>
+  <section class="s" id="s07" data-index="07">
+    <div class="panel">
+      <div class="panel__inner">
+        <svg class="structure structure--side" aria-hidden="true"><use href="#ico-structure"></use></svg>
+        <div class="wrap">
+          <span class="eyebrow r">[ 06 / проектирование ]</span>
+          <h2 class="t t--s r">Проектирование</h2>
+          <div class="cols cols--3">
+            <div class="col r" data-d="1">
+              <h3 class="ch">AutoCAD</h3>
+              <p class="m">AutoLISP&nbsp;— слои, блоки, штампы</p>
+            </div>
+            <div class="col r" data-d="2">
+              <h3 class="ch">Revit</h3>
+              <p class="m">Dynamo, pyRevit&nbsp;— спецификации, ведомости</p>
+            </div>
+            <div class="col r" data-d="3">
+              <h3 class="ch">3ds Max</h3>
+              <p class="m">MAXScript, Python&nbsp;— чистка сцены, батч-переименование, параметрическая геометрия</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 08 -->
-  <section class="s" data-index="08">
-    <div class="wrap">
-      <h2 class="t t--m r">Визуал</h2>
-      <div class="cols cols--3">
-        <div class="col r" data-d="1">
-          <h3 class="ch">Анимация</h3>
-          <p class="m">оживляет рендеры движением камеры и светом&nbsp;— для подачи проекта клиенту</p>
-        </div>
-        <div class="col r" data-d="2">
-          <h3 class="ch">Концепт</h3>
-          <p class="m">собирает референсы и рендеры в единую историю проекта</p>
-        </div>
-        <div class="col r" data-d="3">
-          <h3 class="ch">Photoshop</h3>
-          <p class="m">скрипты и actions, батч-обработка рендеров</p>
+  <section class="s" id="s08" data-index="08">
+    <div class="panel">
+      <div class="panel__inner">
+        <div class="wrap">
+          <span class="eyebrow r">[ 07 / визуал ]</span>
+          <h2 class="t t--m r">Визуал</h2>
+          <div class="cols cols--3">
+            <div class="col r" data-d="1">
+              <h3 class="ch">Анимация</h3>
+              <p class="m">оживляет рендеры движением камеры и светом&nbsp;— для подачи проекта клиенту</p>
+            </div>
+            <div class="col r" data-d="2">
+              <h3 class="ch">Концепт</h3>
+              <p class="m">собирает референсы и рендеры в единую историю проекта</p>
+            </div>
+            <div class="col r" data-d="3">
+              <h3 class="ch">Photoshop</h3>
+              <p class="m">скрипты и actions, батч-обработка рендеров</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 09 -->
-  <section class="s" data-index="09">
-    <div class="wrap">
-      <h2 class="t t--m r">Что ИИ не делает</h2>
-      <ul class="list">
-        <li class="ch ch--sm r" data-d="1">Не проектирует.</li>
-        <li class="ch ch--sm r" data-d="2">Не имеет вкуса.</li>
-        <li class="ch ch--sm r" data-d="3">Не отвечает за размеры и деньги.</li>
-        <li class="ch ch--sm r" data-d="4">Не заменяет разговор с клиентом.</li>
-      </ul>
-      <p class="t t--s r" data-d="6">Дизайн остаётся мой.</p>
+  <section class="s" id="s09" data-index="09">
+    <div class="panel">
+      <div class="panel__inner">
+        <div class="wrap">
+          <span class="eyebrow r">[ 08 / границы ]</span>
+          <h2 class="t t--m r">Что ИИ не делает</h2>
+          <ul class="list">
+            <li class="ch ch--sm r" data-d="1">Не проектирует.</li>
+            <li class="ch ch--sm r" data-d="2">Не имеет вкуса.</li>
+            <li class="ch ch--sm r" data-d="3">Не отвечает за размеры и деньги.</li>
+            <li class="ch ch--sm r" data-d="4">Не заменяет разговор с клиентом.</li>
+          </ul>
+          <p class="t t--s r" data-d="6">Дизайн остаётся мой.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- 10 -->
-  <section class="s" data-index="10">
-    <div class="wrap">
-      <h2 class="t t--xs r">План внедрения</h2>
-      <div class="steps">
-        <div class="step r" data-d="1"><span class="m">01</span><h3 class="ch">Сегодня</h3><p class="m">подключить почту, диск, календарь</p></div>
-        <div class="step r" data-d="2"><span class="m">02</span><h3 class="ch">За неделю</h3><p class="m">собрать референсы и рендеры в единый архив</p></div>
-        <div class="step r" data-d="3"><span class="m">03</span><h3 class="ch">За месяц</h3><p class="m">собрать скрипты под повторяющиеся задачи в CAD и Revit</p></div>
+  <section class="s" id="s10" data-index="10">
+    <div class="panel">
+      <div class="panel__inner">
+        <div class="wrap">
+          <span class="eyebrow r">[ 09 / план ]</span>
+          <h2 class="t t--xs r">План внедрения</h2>
+          <div class="steps">
+            <div class="step r" data-d="1"><span class="m">01</span><h3 class="ch">Сегодня</h3><p class="m">подключить почту, диск, календарь</p></div>
+            <div class="step r" data-d="2"><span class="m">02</span><h3 class="ch">За неделю</h3><p class="m">собрать референсы и рендеры в единый архив</p></div>
+            <div class="step r" data-d="3"><span class="m">03</span><h3 class="ch">За месяц</h3><p class="m">собрать скрипты под повторяющиеся задачи в CAD и Revit</p></div>
+          </div>
+          <p class="t t--s r" data-d="5">Рутина падает.<br>Время идёт в проект и в клиента.</p>
+        </div>
       </div>
-      <p class="t t--s r" data-d="5">Рутина падает.<br>Время идёт в проект и в клиента.</p>
     </div>
   </section>
 
   <!-- 11 -->
-  <section class="s s--center s--final" data-index="11">
-    <div class="wrap">
-      <h2 class="t t--xl r">Я&nbsp;не использовал ИИ. Теперь буду.</h2>
+  <section class="s s--center s--final" id="s11" data-index="11">
+    <div class="panel">
+      <div class="panel__inner">
+        <svg class="structure structure--hero structure--final" aria-hidden="true"><use href="#ico-structure"></use></svg>
+        <div class="wrap">
+          <span class="eyebrow r">[ 10 / финал ]</span>
+          <h2 class="t t--xl r">Я&nbsp;не использовал ИИ. Теперь буду.</h2>
+        </div>
+      </div>
     </div>
   </section>
 
