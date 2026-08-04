@@ -1,0 +1,235 @@
+/* ---------------------------------------------------------
+   Зачем ИИ в архитектуре и дизайне — Donda-минимализм
+   Чёрный фон, белый текст, один серый акцент, два шрифта.
+   --------------------------------------------------------- */
+
+:root{
+  --bg:#000000;
+  --fg:#ffffff;
+  --gray:#888888;
+  --pad-x:clamp(24px, 7vw, 140px);
+  --pad-y:clamp(72px, 10vh, 140px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html{
+  background:var(--bg);
+  scroll-behavior:smooth;
+  scroll-snap-type:y mandatory;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:'Inter',Helvetica,Arial,sans-serif;
+  font-weight:900;
+  overflow-x:hidden;
+}
+
+::selection{background:var(--fg);color:var(--bg)}
+
+/* ---------- секции ---------- */
+
+.s{
+  min-height:100vh;
+  min-height:100svh;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex;
+  align-items:center;
+  padding:var(--pad-y) var(--pad-x);
+}
+
+.wrap{width:100%;max-width:1600px;margin:0 auto}
+
+.s--center{justify-content:center;text-align:center}
+.s--center .wrap{max-width:1400px}
+.s--final .wrap{max-width:1200px}
+
+/* ---------- типографика ---------- */
+
+.t{
+  text-transform:uppercase;
+  font-weight:900;
+  line-height:.92;
+  letter-spacing:-.03em;
+  text-wrap:balance;
+}
+.t--xl{font-size:clamp(38px,6.6vw,116px)}
+.t--l {font-size:clamp(32px,6.4vw,104px)}
+.t--m {font-size:clamp(30px,5.4vw,86px)}
+.t--s {font-size:clamp(26px,4.2vw,64px)}
+.t--xs{font-size:clamp(24px,3.4vw,52px)}
+
+.m{
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-weight:300;
+  font-size:clamp(12px,1.15vw,16px);
+  line-height:1.7;
+  letter-spacing:.02em;
+  color:var(--gray);
+}
+.m--lg{font-size:clamp(14px,1.7vw,24px);line-height:1.5;color:var(--fg)}
+.m--term{font-size:clamp(12px,1.35vw,19px);color:var(--fg)}
+
+.ch{
+  text-transform:uppercase;
+  font-weight:900;
+  font-size:clamp(20px,2.6vw,40px);
+  line-height:1;
+  letter-spacing:-.02em;
+}
+.ch--sm{font-size:clamp(18px,2.2vw,34px)}
+
+.lead{
+  font-weight:400;
+  font-size:clamp(16px,2vw,30px);
+  line-height:1.35;
+  letter-spacing:-.01em;
+  max-width:34ch;
+}
+
+.note{
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-weight:300;
+  font-size:clamp(12px,1.25vw,17px);
+  line-height:1.6;
+  color:var(--gray);
+}
+
+/* ---------- обложка ---------- */
+
+.s--cover .m{margin-top:clamp(28px,5vh,64px);max-width:52ch}
+
+/* ---------- списки ---------- */
+
+.list{list-style:none}
+.list li{margin-top:clamp(10px,1.6vh,18px)}
+
+.s .t + .list,
+.s .t + .rows,
+.s .t + .lead,
+.s .t + .cols,
+.s .t + .steps{margin-top:clamp(36px,7vh,88px)}
+
+.list + .note,
+.list + .t,
+.steps + .t,
+.term + .t{margin-top:clamp(36px,7vh,88px)}
+
+/* ---------- колонки ---------- */
+
+.cols{display:grid;gap:clamp(32px,4vw,72px)}
+.cols--3{grid-template-columns:repeat(3,1fr)}
+.cols--2{grid-template-columns:repeat(2,1fr)}
+
+.col .num{
+  display:block;
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-weight:300;
+  font-size:clamp(30px,3.4vw,56px);
+  line-height:1;
+  letter-spacing:-.02em;
+  color:var(--gray);
+  margin-bottom:clamp(18px,3vh,36px);
+}
+.col .ch{margin-bottom:clamp(12px,2vh,22px)}
+.col .m{max-width:30ch}
+
+/* ---------- строки (коммуникация) ---------- */
+
+.rows{display:block}
+.row{
+  display:grid;
+  grid-template-columns:minmax(0,26%) minmax(0,1fr);
+  gap:clamp(16px,3vw,56px);
+  align-items:baseline;
+  padding:clamp(14px,2.4vh,26px) 0;
+  border-top:1px solid #222;
+}
+.row:last-child{border-bottom:1px solid #222}
+.row .m{max-width:44ch}
+
+/* ---------- терминал ---------- */
+
+.term{margin-top:clamp(32px,6vh,72px)}
+.term p{margin-top:clamp(8px,1.4vh,16px)}
+.term p:first-child{margin-top:0}
+
+/* ---------- шаги ---------- */
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,72px)}
+.step span{display:block;margin-bottom:clamp(14px,2.4vh,28px)}
+.step .ch{margin-bottom:clamp(10px,1.8vh,20px)}
+.step .m{max-width:28ch}
+
+/* ---------- интерфейс: прогресс и счётчик ---------- */
+
+.progress{
+  position:fixed;
+  top:0;right:0;
+  width:1px;
+  height:100vh;
+  height:100svh;
+  background:#222;
+  z-index:10;
+}
+.progress__fill{
+  display:block;
+  width:100%;
+  height:0;
+  background:var(--fg);
+  transform-origin:top;
+}
+
+.counter{
+  position:fixed;
+  left:var(--pad-x);
+  bottom:clamp(20px,3.5vh,40px);
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-weight:400;
+  font-size:clamp(11px,.9vw,13px);
+  letter-spacing:.1em;
+  color:var(--gray);
+  z-index:10;
+  mix-blend-mode:difference;
+}
+.counter__cur{color:var(--fg)}
+
+/* ---------- анимация появления ---------- */
+
+.r{
+  opacity:0;
+  transform:translateY(26px);
+  transition:opacity .8s var(--ease),transform .8s var(--ease);
+}
+.r.in{opacity:1;transform:none}
+
+/* ---------- адаптив ---------- */
+
+@media (max-width:900px){
+  .cols--3,.cols--2,.steps{grid-template-columns:1fr;gap:clamp(24px,4vh,40px)}
+  .col .m,.step .m,.row .m{max-width:none}
+  .row{grid-template-columns:1fr;gap:6px;align-items:start}
+  .lead{max-width:none}
+  .counter{left:var(--pad-x);bottom:20px}
+}
+
+@media (max-width:900px) and (orientation:portrait){
+  /* на узких экранах контент может быть выше вьюпорта — не запираем скролл */
+  html{scroll-snap-type:y proximity}
+  .s{scroll-snap-stop:normal;height:auto}
+}
+
+@media (max-height:520px){
+  html{scroll-snap-type:y proximity}
+  .s{height:auto;scroll-snap-stop:normal}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .r{opacity:1;transform:none;transition:none}
+}
