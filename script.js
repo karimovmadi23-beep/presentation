@@ -45,6 +45,12 @@
     /* --- текущая секция: счётчик, точки пагинации, подсветка в меню --- */
     var currentObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
+        /* --- ролики крутим только на видимом экране --- */
+        var vids = entry.target.querySelectorAll('video');
+        for (var v = 0; v < vids.length; v++) {
+          if (entry.isIntersecting) { var pr = vids[v].play(); if (pr && pr.catch) pr.catch(function () {}); }
+          else vids[v].pause();
+        }
         if (entry.isIntersecting) {
           entry.target.classList.add('is-live');
           var idx = entry.target.getAttribute('data-index');
