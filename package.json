@@ -19,5 +19,8 @@
   "homepage": "https://github.com/karimovmadi23-beep/presentation#readme",
   "dependencies": {
     "framer-motion": "^13.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
   }
 }

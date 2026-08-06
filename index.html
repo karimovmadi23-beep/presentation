@@ -6,7 +6,7 @@
 <title>Как я использую ИИ — и как встроить его в компанию</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/render-01.jpg">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -22,6 +22,9 @@
     </symbol>
     <symbol id="ico-arrow" viewBox="0 0 24 24">
       <path d="M4 12h16M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+    </symbol>
+    <symbol id="ico-pin" viewBox="0 0 16 16">
+      <path d="M8 1.5a4.4 4.4 0 0 0-4.4 4.4C3.6 9.2 8 14.5 8 14.5s4.4-5.3 4.4-8.6A4.4 4.4 0 0 0 8 1.5Zm0 6a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4Z"></path>
     </symbol>
     <symbol id="ico-node" viewBox="0 0 16 16">
       <path d="M8 1v4M8 11v4M1 8h4M11 8h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"></path>
@@ -59,10 +62,12 @@
 
 <!-- фрейм: постоянный UI-чейн поверх панелей -->
 <header class="frame frame--top">
-  <div class="menu-wrap">
+  <span class="mark">ИИ&nbsp;×<br>АРХИТЕКТУРА <span class="mark__slash">/</span></span>
+  <div class="frame__right">
+    <div class="menu-wrap">
     <button class="chrome chrome--menu" id="menuBtn" aria-haspopup="true" aria-expanded="false" aria-controls="menuPanel" type="button">
       <svg class="chrome__icon"><use href="#ico-menu"></use></svg>
-      <span>[ Меню ]</span>
+      <span>Меню</span>
     </button>
     <nav class="menu-panel" id="menuPanel" aria-hidden="true">
       <ol class="menu-panel__list">
@@ -84,15 +89,12 @@
         <li><a href="#s16" data-i="16"><span>16</span>Финал</a></li>
       </ol>
     </nav>
+    </div>
+    <button class="chrome chrome--cta" id="nextBtn" type="button">
+      <span>Далее</span>
+      <svg class="chrome__icon"><use href="#ico-arrow"></use></svg>
+    </button>
   </div>
-  <div class="chrome chrome--mark" aria-hidden="true">
-    <svg class="chrome__icon chrome__icon--mark"><use href="#ico-node"></use></svg>
-    <span class="mark__label">ИИ&nbsp;× АРХИТЕКТУРА</span>
-  </div>
-  <button class="chrome chrome--cta" id="nextBtn" type="button">
-    <span>[ Далее ]</span>
-    <svg class="chrome__icon"><use href="#ico-arrow"></use></svg>
-  </button>
 </header>
 
 <footer class="frame frame--bottom">
@@ -120,26 +122,54 @@
 
   <!-- 01 -->
   <section class="s s--cover s--shot" id="s01" data-index="01">
-    <div class="panel">
-      <figure class="shot shot--cover">
+    <div class="panel panel--photo">
+      <figure data-parallax class="shot shot--cover">
         <img src="assets/render-01.jpg" alt="Архитектурный рендер: минималистичный объём с панорамным остеклением" fetchpriority="high" decoding="async">
       </figure>
       <div class="panel__inner">
-        <div class="wrap">
-          <h1 class="t t--hero r">Как я использую ИИ.<br>И как встроить его в компанию.</h1>
-          <p class="m r" data-d="1">Опыт архитектора и дизайнера интерьера: где ИИ реально помогает, а где решение остаётся за человеком</p>
+
+        <div class="cover__top">
+          <h1 class="t t--hero" data-split>Как я использую ИИ.<br>И как встроить его в компанию.</h1>
+          <span class="cover__meta r">Презентация <i>/</i> 2026</span>
         </div>
+
+        <div class="cover__bottom">
+          <div>
+            <p class="lead r">Опыт архитектора и дизайнера интерьера: где ИИ реально помогает, а где решение остаётся за человеком.</p>
+            <span class="place r">
+              <svg aria-hidden="true"><use href="#ico-pin"></use></svg>
+              Алматы · Костанай · Австралия
+            </span>
+            <div class="thumbs" style="margin-top:clamp(14px,2.4vh,26px)">
+              <figure class="thumb r" data-hover><img src="assets/works/aihub-01.jpg" alt="" loading="lazy" decoding="async"></figure>
+              <figure class="thumb r" data-hover><img src="assets/works/mountain-02.jpg" alt="" loading="lazy" decoding="async"></figure>
+            </div>
+          </div>
+
+          <div class="cover__side">
+            <div class="stat r">
+              <span class="stat__n" data-count="4">4</span>
+              <span class="stat__l">проекта<br>с участием ИИ</span>
+            </div>
+            <p class="m cover__desc r">Четыре реальных проекта, три ролика из рендеров и план внедрения на месяц&nbsp;— без обещаний, только то, что уже работает.</p>
+            <button class="btn-solid r" data-hover id="coverCta" type="button">
+              Смотреть проекты
+              <svg aria-hidden="true"><use href="#ico-arrow"></use></svg>
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- 02 -->
   <section class="s" id="s02" data-index="02">
-    <div class="panel">
+    <div class="panel panel--light">
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 01 / диагностика ]</span>
-          <h2 class="t t--m r">Сначала&nbsp;— где уходит время</h2>
+          <h2 class="t t--m " data-split>Сначала&nbsp;— где уходит время</h2>
           <ul class="list">
             <li class="m m--lg r" data-d="1">сборка референсов в презентацию</li>
             <li class="m m--lg r" data-d="2">спецификации и пересчёт</li>
@@ -155,14 +185,14 @@
 
   <!-- 03 -->
   <section class="s s--center s--shot" id="s03" data-index="03">
-    <div class="panel">
-      <figure class="shot shot--full">
+    <div class="panel panel--photo">
+      <figure data-parallax class="shot shot--full">
         <img src="assets/render-01.jpg" alt="" loading="lazy" decoding="async">
       </figure>
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 02 / тезис ]</span>
-          <h2 class="t t--l r">ИИ&nbsp;— не плагин. Это сотрудник, который умеет писать на языке твоих программ.</h2>
+          <h2 class="t t--l " data-split>ИИ&nbsp;— не плагин. Это сотрудник, который умеет писать на языке твоих программ.</h2>
         </div>
       </div>
     </div>
@@ -174,7 +204,7 @@
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 03 / подключение ]</span>
-          <h2 class="t t--s r">Три способа подключения</h2>
+          <h2 class="t t--s " data-split>Три способа подключения</h2>
           <div class="cols cols--3">
             <div class="col r" data-d="1">
               <span class="num">01</span>
@@ -199,11 +229,11 @@
 
   <!-- 05 -->
   <section class="s" id="s05" data-index="05">
-    <div class="panel">
+    <div class="panel panel--light">
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 04 / коммуникация ]</span>
-          <h2 class="t t--m r">Коммуникация</h2>
+          <h2 class="t t--m " data-split>Коммуникация</h2>
           <dl class="rows">
             <div class="row r" data-d="1"><dt class="ch ch--sm">Почта</dt><dd class="m">читает переписку по объекту, выдаёт статус</dd></div>
             <div class="row r" data-d="2"><dt class="ch ch--sm">Календарь</dt><dd class="m">ставит встречи по голосовой команде</dd></div>
@@ -220,7 +250,7 @@
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 05 / знания ]</span>
-          <h2 class="t t--m r">Знания компании</h2>
+          <h2 class="t t--m " data-split>Знания компании</h2>
           <p class="lead r" data-d="1">Google Диск подключается напрямую. ИИ ищет не по названию файла, а по смыслу.</p>
           <div class="term">
             <p class="m m--term r" data-d="3">&gt; найди спецификацию по объекту на Патриарших</p>
@@ -234,12 +264,12 @@
 
   <!-- 07 -->
   <section class="s" id="s07" data-index="07">
-    <div class="panel">
+    <div class="panel panel--light">
       <div class="panel__inner">
         <svg class="structure structure--side" aria-hidden="true"><use href="#ico-structure"></use></svg>
         <div class="wrap">
           <span class="eyebrow r">[ 06 / проектирование ]</span>
-          <h2 class="t t--s r">Проектирование</h2>
+          <h2 class="t t--s " data-split>Проектирование</h2>
           <div class="cols cols--3">
             <div class="col r" data-d="1">
               <h3 class="ch">AutoCAD</h3>
@@ -262,13 +292,13 @@
   <!-- 08 -->
   <section class="s s--split" id="s08" data-index="08">
     <div class="panel">
-      <figure class="shot shot--side">
+      <figure data-parallax class="shot shot--side">
         <img src="assets/render-01.jpg" alt="" loading="lazy" decoding="async">
       </figure>
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 07 / визуал ]</span>
-          <h2 class="t t--m r">Визуал</h2>
+          <h2 class="t t--m " data-split>Визуал</h2>
           <div class="cols cols--3">
             <div class="col r" data-d="1">
               <h3 class="ch">Анимация</h3>
@@ -294,11 +324,11 @@
 
   <!-- 09 -->
   <section class="s s--work" id="s09" data-index="09">
-    <div class="panel">
+    <div class="panel panel--light">
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 08 / анимация ]</span>
-          <h2 class="t t--s r">Из рендера&nbsp;— в ролик</h2>
+          <h2 class="t t--s " data-split>Из рендера&nbsp;— в ролик</h2>
           <p class="m work__note r" data-d="1">Статичный рендер оживает движением камеры и света. Клиент видит не картинку, а пространство&nbsp;— так проект продаётся сам.</p>
           <div class="work">
             <figure class="work__i r" data-d="2">
@@ -322,7 +352,7 @@
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 09 / проект ]</span>
-          <h2 class="t t--s r">Almaty AI Hub</h2>
+          <h2 class="t t--s " data-split>Almaty AI Hub</h2>
           <p class="m work__note r" data-d="1">Сюрреалистичное пространство вместо стандартного офиса. ИИ помогал набрасывать идеи&nbsp;— отбор и решения мои.</p>
           <div class="work">
             <figure class="work__i r" data-d="2"><img src="assets/works/aihub-01.jpg" alt="Almaty AI Hub: переговорная" loading="lazy" decoding="async"></figure>
@@ -338,11 +368,11 @@
 
   <!-- 11 -->
   <section class="s s--work" id="s11" data-index="11">
-    <div class="panel">
+    <div class="panel panel--light">
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 10 / проект ]</span>
-          <h2 class="t t--s r">Мукомольный завод, Костанай</h2>
+          <h2 class="t t--s " data-split>Мукомольный завод, Костанай</h2>
           <p class="m work__note r" data-d="1">Традиции прошлого и амбиции будущего в одном офисе.</p>
           <div class="work">
             <figure class="work__i r" data-d="2"><img src="assets/works/kostanay-01.jpg" alt="Костанай: кабинет" loading="lazy" decoding="async"></figure>
@@ -362,7 +392,7 @@
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 11 / проект ]</span>
-          <h2 class="t t--s r">Дом в горах, Алматы</h2>
+          <h2 class="t t--s " data-split>Дом в горах, Алматы</h2>
           <p class="m work__note r" data-d="1">Затемнить второстепенное, чтобы раскрыть главное. ИИ собрал референсы с этим приёмом и вывел на Фрэнка Ллойда Райта с его «сжатием и высвобождением».</p>
           <div class="work">
             <figure class="work__i r" data-d="2"><img src="assets/works/mountain-01.jpg" alt="Дом в горах: затемнённый коридор" loading="lazy" decoding="async"></figure>
@@ -378,11 +408,11 @@
 
   <!-- 13 -->
   <section class="s s--work" id="s13" data-index="13">
-    <div class="panel">
+    <div class="panel panel--light">
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 12 / проект ]</span>
-          <h2 class="t t--s r">Дом в Австралии</h2>
+          <h2 class="t t--s " data-split>Дом в Австралии</h2>
           <p class="m work__note r" data-d="1">ИИ собрал референсы и работы австралийских архитекторов&nbsp;— чтобы точнее понять местный образ жизни и культурный контекст.</p>
           <div class="work">
             <figure class="work__i r" data-d="2"><img src="assets/works/australia-01.jpg" alt="Дом в Австралии: кухня" loading="lazy" decoding="async"></figure>
@@ -402,7 +432,7 @@
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 13 / границы ]</span>
-          <h2 class="t t--m r">Что ИИ не делает</h2>
+          <h2 class="t t--m " data-split>Что ИИ не делает</h2>
           <ul class="list">
             <li class="ch ch--sm r" data-d="1">Не проектирует.</li>
             <li class="ch ch--sm r" data-d="2">Не имеет вкуса.</li>
@@ -417,11 +447,11 @@
 
   <!-- 15 -->
   <section class="s" id="s15" data-index="15">
-    <div class="panel">
+    <div class="panel panel--light">
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 14 / план ]</span>
-          <h2 class="t t--xs r">План внедрения</h2>
+          <h2 class="t t--xs " data-split>План внедрения</h2>
           <div class="steps">
             <div class="step r" data-d="1"><span class="m">01</span><h3 class="ch">Сегодня</h3><p class="m">подключить почту, диск, календарь</p></div>
             <div class="step r" data-d="2"><span class="m">02</span><h3 class="ch">За неделю</h3><p class="m">собрать референсы и рендеры в единый архив</p></div>
@@ -435,14 +465,14 @@
 
   <!-- 16 -->
   <section class="s s--center s--final s--shot" id="s16" data-index="16">
-    <div class="panel">
-      <figure class="shot shot--full shot--final">
+    <div class="panel panel--photo">
+      <figure data-parallax class="shot shot--full shot--final">
         <img src="assets/render-01.jpg" alt="" loading="lazy" decoding="async">
       </figure>
       <div class="panel__inner">
         <div class="wrap">
           <span class="eyebrow r">[ 15 / финал ]</span>
-          <h2 class="t t--xl r">Решение&nbsp;— моё. ИИ помогает дотянуть.</h2>
+          <h2 class="t t--xl " data-split>Решение&nbsp;— моё. ИИ помогает дотянуть.</h2>
         </div>
       </div>
     </div>
@@ -450,6 +480,7 @@
 
 </main>
 
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
+<noscript><style>.r{opacity:1}</style></noscript>
 </body>
 </html>
