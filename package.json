@@ -1,0 +1,26 @@
+{
+  "name": "presentation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karimovmadi23-beep/presentation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karimovmadi23-beep/presentation/issues"
+  },
+  "homepage": "https://github.com/karimovmadi23-beep/presentation#readme",
+  "dependencies": {
+    "framer-motion": "^13.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
+  }
+}
