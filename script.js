@@ -67,7 +67,7 @@ function splitHeading(el) {
 const REVEAL = [
   '.eyebrow', '.lead', '.m', '.note', '.list li', '.col', '.row',
   '.step', '.term p', '.work__i', '.thumb', '.stat', '.btn-solid',
-  '.place', '.cover__meta', '.ch', '.pills', '.pill'
+  '.place', '.cover__meta', '.ch', '.pills', '.pill', '.search'
 ].join(',');
 
 function enter(section) {
@@ -237,6 +237,38 @@ document.getElementById('nextBtn')?.addEventListener('click', () => goTo(current
 document.getElementById('coverCta')?.addEventListener('click', () => {
   document.getElementById('s10')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+
+/* --- поиск по разделам: подсказка на лету, Enter — переход --- */
+const searchInput = document.getElementById('searchInput');
+const searchHit = document.getElementById('searchHit');
+
+if (searchInput && searchHit) {
+  const index = menuLinks.map(a => ({
+    id: a.getAttribute('href').slice(1),
+    num: a.dataset.i,
+    title: a.textContent.replace(/^\d+/, '').trim()
+  }));
+
+  let found = null;
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    found = q ? index.find(s => s.title.toLowerCase().includes(q)) : null;
+
+    searchHit.textContent = q ? (found ? `${found.num} · ${found.title}` : 'ничего') : '';
+    animate(searchHit, { opacity: q ? 1 : 0, x: q ? 0 : -6 }, { duration: 0.25 });
+  });
+
+  searchInput.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' || !found) return;
+    e.preventDefault();
+    document.getElementById(found.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    searchInput.value = '';
+    searchInput.blur();
+    searchHit.textContent = '';
+    animate(searchHit, { opacity: 0 }, { duration: 0.2 });
+  });
+}
 
 const menuBtn = document.getElementById('menuBtn');
 const menuPanel = document.getElementById('menuPanel');
