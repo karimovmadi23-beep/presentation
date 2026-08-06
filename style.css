@@ -309,7 +309,11 @@ body{
   overscroll-behavior-x:contain;
   scrollbar-width:none;
   padding-bottom:2px;
+  scroll-snap-type:x proximity;
+  -webkit-mask-image:linear-gradient(to right,#000 90%,rgba(0,0,0,.15) 100%);
+  mask-image:linear-gradient(to right,#000 90%,rgba(0,0,0,.15) 100%);
 }
+.work__i{scroll-snap-align:start}
 .work::-webkit-scrollbar{display:none}
 
 .work__i{
@@ -326,6 +330,9 @@ body{
   width:auto;
   max-width:none;
 }
+
+.work--tight{margin-top:clamp(18px,3vh,34px)}
+.work--tight .work__i img{height:clamp(130px,22vh,210px)}
 
 .work__note{max-width:56ch;margin-top:clamp(10px,1.8vh,18px)}
 .s--work .t + .work__note{margin-top:clamp(12px,2.2vh,22px)}
