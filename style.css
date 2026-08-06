@@ -324,7 +324,8 @@ body{
   background:var(--bg-2);
   box-shadow:0 16px 36px -24px rgba(30,26,18,.5);
 }
-.work__i img{
+.work__i img,
+.work__i video{
   display:block;
   height:clamp(190px,38vh,380px);
   width:auto;
@@ -336,36 +337,6 @@ body{
 
 .work__note{max-width:56ch;margin-top:clamp(10px,1.8vh,18px)}
 .s--work .t + .work__note{margin-top:clamp(12px,2.2vh,22px)}
-
-/* ---------- ролики ---------- */
-
-.reel{
-  display:grid;
-  grid-template-columns:minmax(0,auto) minmax(0,auto) minmax(0,1fr);
-  gap:clamp(16px,2.4vw,36px);
-  align-items:end;
-  margin-top:clamp(24px,4.4vh,54px);
-}
-.reel__item{
-  position:relative;
-  margin:0;
-  border-radius:clamp(10px,1.2vw,16px);
-  overflow:hidden;
-  background:var(--bg-2);
-  box-shadow:0 18px 40px -22px rgba(30,26,18,.5);
-}
-.reel__item video{
-  display:block;
-  height:clamp(220px,42vh,420px);
-  width:auto;
-  max-width:100%;
-  object-fit:cover;
-}
-.reel__note{
-  align-self:end;
-  max-width:32ch;
-  padding-bottom:.4em;
-}
 
 /* ---------- шаги ---------- */
 
@@ -546,10 +517,8 @@ body{
 @media (max-width:900px){
   :root{--frame-reserve:96px}
   .cols--3,.cols--2,.steps{grid-template-columns:1fr;gap:clamp(22px,4vh,36px)}
-  .work__i img{height:clamp(150px,26vh,240px)}
-  .reel{grid-template-columns:1fr 1fr;gap:clamp(10px,2.4vw,18px)}
-  .reel__item video{height:auto;width:100%;aspect-ratio:4/5}
-  .reel__note{grid-column:1 / -1;max-width:none;padding-bottom:0}
+  .work__i img,
+  .work__i video{height:clamp(150px,26vh,240px)}
   .col .m,.step .m,.row .m{max-width:none}
   .row{grid-template-columns:1fr;gap:6px;align-items:start}
   .lead{max-width:none}
