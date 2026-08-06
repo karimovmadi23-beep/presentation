@@ -67,7 +67,7 @@ function splitHeading(el) {
 const REVEAL = [
   '.eyebrow', '.lead', '.m', '.note', '.list li', '.col', '.row',
   '.step', '.term p', '.work__i', '.thumb', '.stat', '.btn-solid',
-  '.place', '.cover__meta', '.ch'
+  '.place', '.cover__meta', '.ch', '.pills', '.pill'
 ].join(',');
 
 function enter(section) {
